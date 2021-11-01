@@ -8,9 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SecurityController extends AbstractController
 {
-    /**
-    * @Route("/user/login/check", name="login_check", methods={"POST"})
-    */
+    #[Route('/user/login/check', name: 'login_check', methods:["POST"])]
     public function loginCheck() {
         $user = $this->getUser();
         return $this->json(array(
