@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\UserProfileRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserProfileRepository;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=UserProfileRepository::class)
@@ -20,16 +21,19 @@ class UserProfile
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
+    #[Groups(["user_profile"])]
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
+    #[Groups(["user_profile"])]
     private $lastname;
 
     /**
      * @ORM\Column(type="date", nullable=true)
      */
+    #[Groups(["user_profile"])]
     private $birthdate;
 
     public function getId(): ?int

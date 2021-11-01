@@ -18,19 +18,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    #[Groups("user")]
+    #[Groups(["user", "user_profile"])]
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
-    #[Groups("user")]
+    #[Groups(["user", "user_profile"])]
     private $username;
 
     /**
      * @ORM\Column(type="json")
      */
-    #[Groups("user")]
+    #[Groups(["user", "user_profile"])]
     private $roles = [];
 
     /**
@@ -42,6 +42,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\OneToOne(targetEntity=UserProfile::class, cascade={"persist", "remove"})
      */
+    #[Groups(["user", "user_profile"])]
     private $profile;
 
     public function getId(): ?int
