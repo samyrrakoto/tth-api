@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -44,6 +46,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[Groups(["user", "user_profile"])]
     private $profile;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Day::class, mappedBy="user")
+     */
+    private $days;
+
+    public function __construct()
+    {
+        $this->days = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -134,6 +146,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setProfile(?UserProfile $profile): self
     {
         $this->profile = $profile;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Day[]
+     */
+    public function getDays(): Collection
+    {
+        return $this->days;
+    }
+
+    public function addDay(Day $day): self
+    {
+        if (!$this->days->contains($day)) {
+            $this->days[] = $day;
+            $day->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDay(Day $day): self
+    {
+        if ($this->days->removeElement($day)) {
+            // set the owning side to null (unless already changed)
+            if ($day->getUser() === $this) {
+                $day->setUser(null);
+            }
+        }
 
         return $this;
     }
