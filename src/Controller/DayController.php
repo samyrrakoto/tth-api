@@ -22,6 +22,7 @@ class DayController extends AbstractController
     public function createDayByUser(Request $request): Response
     {
         $day = $this->dayManager->createDayByUser($this->getUser(), $request->getContent());
+
         return $this->json($day, JsonResponse::HTTP_CREATED, [], ['groups' => 'day']);
     }
 }

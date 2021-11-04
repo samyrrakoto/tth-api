@@ -20,7 +20,7 @@ class UserProfileController extends AbstractController
             return $this->json($user, JsonResponse::HTTP_OK, [], ['groups' => 'user_profile']);
         } else {
             $user = $profileManager->createUserProfile($user, $request->getContent());
-            
+
             return $this->json($user, JsonResponse::HTTP_CREATED, [], ['groups' => 'user_profile']);
         }
     }
