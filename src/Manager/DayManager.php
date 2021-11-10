@@ -26,8 +26,21 @@ class DayManager extends BaseManager
         return $this->persistFlush($day);
     }
 
-    public function getDaysByInterval(string $start, string $end): array
+    public function getDaysByCriteria(User $user, array $criteria): array
     {
-        return $days = [];
+        return $this->dayRepository->findByCriterias(
+            $user,
+            $criteria['id'],
+            $criteria['date'],
+            $criteria['startDate'],
+            $criteria['endDate'],
+            $criteria['rating'],
+            $criteria['startRating'],
+            $criteria['endRating'],
+            $criteria['page'],
+            $criteria['resultsPerPage'],
+            $criteria['orderBy'],
+            $criteria['sort'],
+        );
     }
 }
