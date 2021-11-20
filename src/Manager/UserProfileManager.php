@@ -7,7 +7,10 @@ use App\Entity\UserProfile;
 
 class UserProfileManager extends BaseManager
 {
-    public function __construct($em, $serializer)
+    public function __construct(
+        $em,
+        $serializer,
+        )
     {
         parent::__construct($em, $serializer);
     }
@@ -17,7 +20,7 @@ class UserProfileManager extends BaseManager
         $profile = new UserProfile();
         $profile = $this->serializer->deserialize($payload, UserProfile::class, 'json');
         $user->setProfile($profile);
-        
+
         return $this->persistFlush($user);
     }
 }

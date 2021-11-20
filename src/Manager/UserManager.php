@@ -3,18 +3,17 @@
 namespace App\Manager;
 
 use App\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserManager extends BaseManager
 {
-    private $pwdHasher;
-
-    public function __construct($em, $serializer, UserPasswordHasherInterface  $pwdHasher)
+    public function __construct(
+        $em,
+        $serializer,
+        private UserPasswordHasherInterface $pwdHasher,
+        )
     {
         parent::__construct($em, $serializer);
-        $this->pwdHasher = $pwdHasher;
     }
 
     public function createUser(string $payload): User

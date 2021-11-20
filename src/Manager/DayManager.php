@@ -9,12 +9,13 @@ use App\Repository\DayRepository;
 
 class DayManager extends BaseManager
 {
-    private $dayRepository;
-
-    public function __construct($em, $serializer, DayRepository $dayRepository)
+    public function __construct(
+        $em,
+        $serializer,
+        private DayRepository $dayRepository,
+        )
     {
         parent::__construct($em, $serializer);
-        $this->dayRepository = $dayRepository;
     }
 
     public function createDayByUser(User $user, string $payload): Day

@@ -11,12 +11,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DayController extends AbstractController
 {
-    private $dayManager;
-
-    public function __construct(DayManager $dayManager)
-    {
-        $this->dayManager = $dayManager;
-    }
+    public function __construct(
+        private DayManager $dayManager,
+        ) {}
 
     #[Route('/secure/day', name: 'day_create', methods:["POST"])]
     public function createDayByUser(Request $request): Response
