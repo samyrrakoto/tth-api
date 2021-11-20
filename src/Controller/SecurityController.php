@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SecurityController extends AbstractController
 {
-    #[Route('/user/login/check', name: 'login_check', methods:["POST"])]
+    #[Route('/user/auth', name: 'user_authenticate', methods:["POST"])]
     public function loginCheck() {
         $user = $this->getUser();
 
